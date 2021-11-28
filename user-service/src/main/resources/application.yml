@@ -1,0 +1,27 @@
+#application.properties rename to application.yml
+
+#1.서비스의 포트번호 지정
+server:
+#  port: 9001  #Random Port를 사용하기 위해 지정포트 주석처리
+  port: 0      #Random Port를 사용하기 위해 포트번호를 0으로 지정한다.
+
+#2.spring application name 지정
+spring:
+  application:
+    name: user-service  #여기에 작성된 name이 Eureka Server에 등록할 Application name이 된다
+
+#3.Eureka 항목 등록
+#-register-with-eureka는 eureka의 registry에 등록할지 여부를 설정함
+#-eureka.client.fetch-registry=true 는 Eureka 서버로 부터 인스턴스들의 정보를 주기적으로 가져올 것인지를 설정하는 속성
+# => true로 설정하면 갱신된 정보를 받겠다는 설정
+#-service-url: Eureka 서버의 위치를 지정
+eureka:
+  # instance-id random.value를 사용하여 Eureka instance Id를 지정함
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka   #eureka 라는 endpoint에 micro service를 등록
+
