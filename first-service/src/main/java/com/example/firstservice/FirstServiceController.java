@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.Enumeration;
 
-@RestController
+@RestController  // 화면 없이 RestAPI 형태로 서비스하기 위해 @RestController 사용
 @RequestMapping("/first-service")
 @Slf4j
 public class FirstServiceController {

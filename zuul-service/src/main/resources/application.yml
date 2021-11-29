@@ -1,0 +1,16 @@
+server:
+  port: 8000  # port번호 설정
+
+spring:
+  application:
+    name: my-zuul-service  # application name 설정
+
+#라우팅 설정
+zuul:
+  routes:
+    first-service:
+      path: /first-service/**
+      url: http://localhost:8081  #8000번 port로 /first-service/ 에 해당하는 모든 요청이 들어오면 8081 port로 forwarding 한다
+    second-service:
+      path: /second-service/**
+      url: http://localhost:8082  #8000번 port로 /second-service/ 에 해당하는 모든 요청이 들어오면 8081 port로 forwarding 한다
