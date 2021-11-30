@@ -19,38 +19,17 @@ import java.util.Enumeration;
 @RequestMapping("/first-service")
 @Slf4j
 public class FirstServiceController {
-    Environment env;
-
-    @Autowired
-    public FirstServiceController(Environment env) {
-        this.env = env;
-    }
-
     @GetMapping("/welcome")
     public String welcome() {
         return "Welcome to the First service.";
     }
 
     @GetMapping("/message")
+    // 매개변수로 API Gateway에 /first-request/** 로 요청시 filter에서 RequestHeader 에 추가하는 first-request의 value를 전달
     public String message(@RequestHeader("first-request") String header) {
         log.info(header);
-        return "Hello World in First Service.";
+
+        return "Hello World in First Service";
     }
 
-    @GetMapping("/check")
-    public String check(HttpServletRequest request) {
-        Enumeration<String> headers = request.getHeaderNames();
-        Collections.list(headers).stream().forEach(name -> {
-            Enumeration<String> values = request.getHeaders(name);
-            Collections.list(values).stream().forEach(value -> System.out.println(name + "=" + value));
-        });
-
-        log.info("Server port={}", request.getServerPort());
-
-        log.info("spring.cloud.client.hostname={}", env.getProperty("spring.cloud.client.hostname"));
-        log.info("spring.cloud.client.ip-address={}", env.getProperty("spring.cloud.client.ip-address"));
-
-        return String.format("Hi, there. This is a message from First Service on PORT %s"
-                , env.getProperty("local.server.port"));
-    }
 }

@@ -11,16 +11,17 @@ eureka:
 spring:
   application:
     name: apigateway-service
-  cloud:
-    gateway:
-      routes:  # routes 에 여러개의 라우트 객체를 등록할 수 있음
-        - id: first-service
-          uri: http://localhost:8081/
-          predicates:  # 조건절과 비슷
-            - Path=/first-service/**
-            # Path의 정보가 /first-service/ 로 시작하는 모든 요청정보는 http://localhost:8008/ 로 포워딩 한다
-            # http://localhost:8081/first-service/** 와 같이 요청됨
-        - id: second-service
-          uri: http://localhost:8082/
-          predicates:
-            - Path=/second-service/**
+# 자바코드로 구현하기 위해 gateway 설정 주석처리
+#  cloud:
+#    gateway:
+#      routes:  # routes 에 여러개의 라우트 객체를 등록할 수 있음
+#        - id: first-service
+#          uri: http://localhost:8081/
+#          predicates:  # 조건절과 비슷
+#            - Path=/first-service/**
+#            # Path의 정보가 /first-service/ 로 시작하는 모든 요청정보는 http://localhost:8008/ 로 포워딩 한다
+#            # http://localhost:8081/first-service/** 와 같이 요청됨
+#        - id: second-service
+#          uri: http://localhost:8082/
+#          predicates:
+#            - Path=/second-service/**
