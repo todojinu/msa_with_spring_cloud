@@ -18,9 +18,11 @@ spring:
           uri: http://localhost:8081/
           predicates:  # 조건절과 비슷
             - Path=/first-service/**
-            # Path의 정보가 /first-service/ 로 시작하는 모든 요청정보는 http://localhost:8008/ 로 포워딩 한다
-            # http://localhost:8081/first-service/** 와 같이 요청됨
+          filters:
+            - CustomFilter  # 생성한 CustomFilter를 적용
         - id: second-service
           uri: http://localhost:8082/
           predicates:
             - Path=/second-service/**
+          filters:
+            - CustomFilter
