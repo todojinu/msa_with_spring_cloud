@@ -23,7 +23,7 @@ public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Conf
     }
 
     @Override
-    public GatewayFilter apply(Config config) {  // apply 메소드 구현
+    public GatewayFilter apply(Config config) {  // GatewayFilter를 반환하는 apply 메소드 구현
 
         // Custom Pre Filter
         return (exchange, chain) -> {  // 람다식의 매개변수로 exchange와 chain을 받는다

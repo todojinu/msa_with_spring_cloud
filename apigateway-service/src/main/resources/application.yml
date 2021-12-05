@@ -32,4 +32,9 @@ spring:
           predicates:
             - Path=/second-service/**
           filters:
-            - CustomFilter
+            - name: CustomFilter
+            - name: LoggingFilter  # 추가적인 parameter를 넘기고 싶다면 name: 을 사용해야함
+              args:
+                baseMessage: Hi, there.
+                preLogger: true
+                postLogger: true
