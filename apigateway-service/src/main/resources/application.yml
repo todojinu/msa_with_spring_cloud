@@ -13,6 +13,13 @@ spring:
     name: apigateway-service
   cloud:
     gateway:
+      # Global Filter 설정
+      default-filters:
+        - name: GlobalFilter
+          args:  # Global Filter 의 Config 항목의 값을 설정
+            baseMessage: Spring Cloud Gateway Global Filter
+            preLogger: true
+            postLogger: true
       routes:  # routes 에 여러개의 라우트 객체를 등록할 수 있음
         - id: first-service
           uri: http://localhost:8081/
