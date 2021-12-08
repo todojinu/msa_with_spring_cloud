@@ -1,10 +1,11 @@
 server:
   port: 8000
 
+# Eureka Service Discovery 에 Client 로 등록하기 위한 설정 추가
 eureka:
   client:
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: true
+    fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
 
@@ -22,13 +23,15 @@ spring:
             postLogger: true
       routes:  # routes 에 여러개의 라우트 객체를 등록할 수 있음
         - id: first-service
-          uri: http://localhost:8081/
+          #uri: http://localhost:8081/
+          uri: lb://MY-FIRST-SERVICE  #로드발란서 적용. lb://어플리케이션 이름
           predicates:  # 조건절과 비슷
             - Path=/first-service/**
           filters:
             - CustomFilter  # 생성한 CustomFilter를 적용
         - id: second-service
-          uri: http://localhost:8082/
+          #uri: http://localhost:8082/
+          uri: lb://MY-SECOND-SERVICE  #로드발란서 적용
           predicates:
             - Path=/second-service/**
           filters:
