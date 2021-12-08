@@ -1,5 +1,6 @@
 server:
-  port: 8081
+#  port: 8081
+  port: 0  # 랜덤 port 사용을 위해 0 으로 설정
 
 spring:
   application:
@@ -11,3 +12,8 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+  # 랜덤 port 사용시 Eureka Server 에 port 번호가 0 으로 등록되는 것을 방지하기 위해 instance 설정 추가
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+
